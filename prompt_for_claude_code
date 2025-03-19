@@ -1,0 +1,43 @@
+I want you to implement an appointment scheduling application using strict Acceptance Test-Driven Development (ATDD) principles. Start with this high-level scenario:
+
+* Given I want to book an appointment
+* When I select my preferred appointment date and time
+* My appointment is stored for me to check later
+
+Work through these steps automatically and document each step:
+
+1. EXPAND: Expand this scenario into formal Gherkin with multiple scenarios and examples
+2. DSL: Create a domain-specific language (DSL) in Ruby that abstracts implementation details
+3. TEST INFRASTRUCTURE: Set up a testing framework with step definitions
+4. RUN TESTS: Run the tests to see them fail, documenting failure messages
+5. IMPLEMENT CODE: Implement only what's needed to make the current failing test pass
+6. TEST AGAIN: Run tests to verify progress
+7. REPEAT: Continue implementing and testing until all tests pass
+
+For each step:
+- Explain your reasoning
+- Show what code you're creating or modifying
+- Run appropriate commands to test your progress
+- Document exact test output (failures or passes)
+- Note any challenges or decisions made
+
+Create a development log as you go, structured like:
+
+[STEP 1: Expanding scenarios]
+...your work...
+[TEST OUTPUT]
+...test results...
+
+[STEP 2: ...]
+...
+
+IMPORTANT:
+- Follow strict ATDD - let failing tests guide your implementation
+- Implement just enough to make current tests pass
+- Document every test run
+- Use Ruby with Sinatra for the web implementation
+- Keep the application very simple (in-memory storage is fine)
+- Use Rack::Test for testing
+- Each test failure should be fixed in a small, specific way
+
+Begin by expanding the user scenario into formal Gherkin specifications.
