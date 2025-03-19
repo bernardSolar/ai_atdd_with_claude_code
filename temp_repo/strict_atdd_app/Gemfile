@@ -1,0 +1,10 @@
+source 'https://rubygems.org'
+
+gem 'sinatra', '~> 3.0.6'  # Specify a version that is known to work well
+gem 'cucumber'
+gem 'rspec'
+gem 'rack-test'
+gem 'capybara'
+gem 'rackup'
+gem 'webrick'
+gem 'thin'  # Alternative Rack server

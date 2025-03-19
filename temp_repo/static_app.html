@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Appointment Scheduler</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 40px; }
+    .form { margin-bottom: 30px; }
+    #appointments { margin-top: 30px; }
+    .appointment { margin: 5px 0; }
+  </style>
+  <script>
+    // Client-side only appointment storage
+    let appointments = [];
+    
+    function initialize() {
+      // Load any existing appointments from localStorage
+      const saved = localStorage.getItem('appointments');
+      if (saved) {
+        appointments = JSON.parse(saved);
+        displayAppointments();
+      }
+    }
+    
+    function bookAppointment() {
+      const date = document.getElementById('date').value;
+      const time = document.getElementById('time').value;
+      
+      // Validation
+      if (!date || !time) {
+        alert('Please select both date and time');
+        return false;
+      }
+      
+      // Check if date is in the past
+      const appointmentDate = new Date(`${date}T${time}`);
+      if (appointmentDate < new Date()) {
+        alert('Cannot book appointments in the past');
+        return false;
+      }
+      
+      // Check if time is already booked
+      const isBooked = appointments.some(a => a.date === date && a.time === time);
+      if (isBooked) {
+        alert('This time is already booked');
+        return false;
+      }
+      
+      // Add appointment
+      appointments.push({ date, time });
+      
+      // Save to localStorage
+      localStorage.setItem('appointments', JSON.stringify(appointments));
+      
+      // Update display
+      displayAppointments();
+      
+      // Clear form
+      document.getElementById('date').value = '';
+      document.getElementById('time').value = '';
+      
+      alert('Appointment booked successfully!');
+      return false;
+    }
+    
+    function displayAppointments() {
+      const list = document.getElementById('appointmentList');
+      list.innerHTML = '';
+      
+      if (appointments.length === 0) {
+        list.innerHTML = '<p>You have no appointments scheduled.</p>';
+        return;
+      }
+      
+      for (const appointment of appointments) {
+        const item = document.createElement('div');
+        item.className = 'appointment';
+        item.textContent = `Date: ${appointment.date}, Time: ${appointment.time}`;
+        list.appendChild(item);
+      }
+    }
+  </script>
+</head>
+<body onload="initialize()">
+  <h1>Appointment Scheduler</h1>
+  
+  <div class="form">
+    <h2>Book an Appointment</h2>
+    <form onsubmit="return bookAppointment()">
+      <div>
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date" required>
+      </div>
+      <div>
+        <label for="time">Time:</label>
+        <input type="time" id="time" name="time" required>
+      </div>
+      <div>
+        <button type="submit">Book Appointment</button>
+      </div>
+    </form>
+  </div>
+  
+  <div id="appointments">
+    <h2>My Appointments</h2>
+    <div id="appointmentList"></div>
+  </div>
+</body>
+</html>
